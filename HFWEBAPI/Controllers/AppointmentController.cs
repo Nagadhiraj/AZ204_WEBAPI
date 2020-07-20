@@ -10,8 +10,8 @@ using Microsoft.Extensions.Configuration;
 
 namespace HFWEBAPI.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class AppointmentController : ControllerBase
     {
         private IConfiguration config;

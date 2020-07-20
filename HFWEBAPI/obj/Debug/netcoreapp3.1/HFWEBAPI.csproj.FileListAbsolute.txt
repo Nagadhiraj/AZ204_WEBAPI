@@ -24,3 +24,4 @@ D:\Applications\HFAPP\HFWEBAPI\HFWEBAPI\obj\Debug\netcoreapp3.1\staticwebassets\
 D:\Applications\HFAPP\HFWEBAPI\HFWEBAPI\obj\Debug\netcoreapp3.1\HFWEBAPI.dll
 D:\Applications\HFAPP\HFWEBAPI\HFWEBAPI\obj\Debug\netcoreapp3.1\HFWEBAPI.pdb
 D:\Applications\HFAPP\HFWEBAPI\HFWEBAPI\obj\Debug\netcoreapp3.1\HFWEBAPI.genruntimeconfig.cache
+D:\Applications\HFAPP\HFWEBAPI\HFWEBAPI\obj\Debug\netcoreapp3.1\HFWEBAPI.csprojAssemblyReference.cache

@@ -10,8 +10,8 @@ using HFWEBAPI.DataAccess;
 
 namespace HFWEBAPI.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class ArticleController : ControllerBase
     {
         private IConfiguration config;
