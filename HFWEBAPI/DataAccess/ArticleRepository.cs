@@ -10,12 +10,12 @@ using Microsoft.Extensions.Configuration;
 
 namespace HFWEBAPI.DataAccess
 {
-    public class UserRepository<T> : IUserRepository<T> where T : class
+    public class ArticleRepository<T> : IArticleRepository<T> where T : class
     {
         private DocumentClient client;
         private IConfiguration _config;
 
-        public UserRepository(IConfiguration configuration)
+        public ArticleRepository(IConfiguration configuration)
         {
             _config = configuration;
             client = new DocumentClient(new Uri(_config.GetValue<string>("Values:CosmosDBEndpoint")), _config.GetValue<string>("Values:CosmosDBKey"));
@@ -109,10 +109,5 @@ namespace HFWEBAPI.DataAccess
                 }
             }
         }
-
-        //public static string GetEnvironmentVariable(string name)
-        //{
-        //    return System.Environment.GetEnvironmentVariable(name, EnvironmentVariableTarget.Process);
-        //}
     }
 }

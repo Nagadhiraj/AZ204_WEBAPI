@@ -10,12 +10,12 @@ using Microsoft.Extensions.Configuration;
 
 namespace HFWEBAPI.DataAccess
 {
-    public class UserRepository<T> : IUserRepository<T> where T : class
+    public class AppointmentRepository<T> : IAppointmentRepository<T> where T : class
     {
         private DocumentClient client;
         private IConfiguration _config;
 
-        public UserRepository(IConfiguration configuration)
+        public AppointmentRepository(IConfiguration configuration)
         {
             _config = configuration;
             client = new DocumentClient(new Uri(_config.GetValue<string>("Values:CosmosDBEndpoint")), _config.GetValue<string>("Values:CosmosDBKey"));
@@ -37,21 +37,6 @@ namespace HFWEBAPI.DataAccess
             return results;
         }
 
-        public async Task<IEnumerable<T>> GetItemsAsync(string collectionId)
-        {
-            IDocumentQuery<T> query = client.CreateDocumentQuery<T>(
-                UriFactory.CreateDocumentCollectionUri(_config.GetValue<string>("Values:COSMOSDB_DATABASE_NAME"), collectionId),
-                new SqlQuerySpec("SELECT * FROM c where c.isActive = true"),
-                new FeedOptions { EnableCrossPartitionQuery = true, MaxItemCount = -1 })
-                .AsDocumentQuery();
-
-            List<T> results = new List<T>();
-            while (query.HasMoreResults)
-            {
-                results.AddRange(await query.ExecuteNextAsync<T>());
-            }
-            return results;
-        }
 
         public async Task<Document> CreateItemAsync(T item, string collectionId)
         {
@@ -110,9 +95,37 @@ namespace HFWEBAPI.DataAccess
             }
         }
 
-        //public static string GetEnvironmentVariable(string name)
+        //public async Task<IEnumerable<T>> GetUserAppointmentsAsync(string userId, string collectionId)
         //{
-        //    return System.Environment.GetEnvironmentVariable(name, EnvironmentVariableTarget.Process);
+        //    var strQuery = "SELECT * FROM c where c.isActive = true"
+        //    IDocumentQuery<T> query = client.CreateDocumentQuery<T>(
+        //        UriFactory.CreateDocumentCollectionUri(_config.GetValue<string>("Values:COSMOSDB_DATABASE_NAME"), collectionId),
+        //        new SqlQuerySpec("SELECT * FROM c where c.isActive = true"),
+        //        new FeedOptions { EnableCrossPartitionQuery = true, MaxItemCount = -1 })
+        //        .AsDocumentQuery();
+
+        //    List<T> results = new List<T>();
+        //    while (query.HasMoreResults)
+        //    {
+        //        results.AddRange(await query.ExecuteNextAsync<T>());
+        //    }
+        //    return results;
+        //}
+
+        //public async Task<IEnumerable<T>> GetAppointmentsByDateAsync(string start, string end, string collectionId)
+        //{
+        //    IDocumentQuery<T> query = client.CreateDocumentQuery<T>(
+        //        UriFactory.CreateDocumentCollectionUri(_config.GetValue<string>("Values:COSMOSDB_DATABASE_NAME"), collectionId),
+        //        new SqlQuerySpec("SELECT * FROM c where c.isActive = true"),
+        //        new FeedOptions { EnableCrossPartitionQuery = true, MaxItemCount = -1 })
+        //        .AsDocumentQuery();
+
+        //    List<T> results = new List<T>();
+        //    while (query.HasMoreResults)
+        //    {
+        //        results.AddRange(await query.ExecuteNextAsync<T>());
+        //    }
+        //    return results;
         //}
     }
 }

@@ -30,10 +30,10 @@ namespace HFWEBAPI.Controllers
             List<UserEntity> users = new List<UserEntity>();
             foreach (var result in results)
             {
-                if (result.isActive == true)
-                {
+                //if (result.isActive == true)
+                //{
                     users.Add(result);
-                }
+                //}
             }
             return users;
         }
