@@ -1,21 +1,21 @@
 ﻿using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
 using Microsoft.Azure.Documents.Linq;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
 
 namespace HFWEBAPI.DataAccess
 {
-    public class AppointmentRepository<T> : IAppointmentRepository<T> where T : class
+    public class ChartRepository<T> : IChartRepository<T> where T : class
     {
         private DocumentClient client;
         private IConfiguration _config;
 
-        public AppointmentRepository(IConfiguration configuration)
+        public ChartRepository(IConfiguration configuration)
         {
             _config = configuration;
             client = new DocumentClient(new Uri(_config.GetValue<string>("Values:CosmosDBEndpoint")), _config.GetValue<string>("Values:CosmosDBKey"));
